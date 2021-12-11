@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-8 news-content">
+            {{ news.text|safe }}
+        </div>
+        <div class="col-4">
+            <h2>Другие новости</h2>
+            {% for news in news_list %}
+                <h4><a href="{{ url_for('news.single_news', news_id=news.id) }}">{{ news.title }}</a></h4>
+                <p>{{ news.published.strftime('%d.%m.%Y') }}</p>
+                <hr />
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

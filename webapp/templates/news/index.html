@@ -14,7 +14,7 @@
             {% endwith %}
             <h2>Новости</h2>
             {% for news in news_list %}
-                <h3><a href="{{ news.url }}">{{ news.title }}</a></h3>
+                <h3><a href="{{ url_for('news.single_news', news_id=news.id) }}">{{ news.title }}</a></h3>
                 <p>{{ news.published.strftime('%d.%m.%Y') }}</p>
                 <hr />
             {% endfor %}
@@ -22,7 +22,7 @@
         <div class="col-4">
             <h2>Погода</h2>
             {% if weather %}
-                {{ weather.temp_C }}°, ощущается как {{ weather.FeelsLikeC }}°
+                {{ weather.temp }}°, ощущается как {{ weather.feels_like }}°
             {% else %}
                 Сервис погоды временно недоступен
             {% endif %}

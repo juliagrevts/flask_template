@@ -1,26 +1,25 @@
 from flask import current_app
 import requests
 
+import webapp
+
 def weather_by_city(city_name):
     weather_url = current_app.config['WEATHER_URL']
     params = {
-        'key': current_app.config['WEATHER_API_KEY'],
         'q': city_name,
-        'format': 'json',
-        'num_of_days': 1,
+        'appid': current_app.config['WEATHER_API_KEY'],
+        'units': 'metric',
         'lang': 'ru'
     }
     try:
         result = requests.get(weather_url, params=params)
         result.raise_for_status()
         weather = result.json()
-        if 'data' in weather:
-            if 'current_condition' in weather['data']:
-                try:
-                    return weather['data']['current_condition'][0]
-                except(IndexError, TypeError):
-                    return False
-    except(requests.RequestException, ValueError):
+        if 'main' in weather:
+            weather['main']['temp'] = round(weather['main']['temp'])
+            weather['main']['feels_like'] = round(weather['main']['feels_like'])
+            return weather['main']
+    except(requests.RequestException, ValueError, TypeError):
         print('Сетевая ошибка')
         return False
     return False
