@@ -19,5 +19,5 @@ def habr_content():
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(crontab(hour='*/1'), habr_snippets.s())
-    sender.add_periodic_task(crontab(hour='*/1'), habr_content.s())
+    sender.add_periodic_task(crontab(minute=0, hour='*/1'), habr_snippets.s())
+    sender.add_periodic_task(crontab(minute=0, hour='*/1'), habr_content.s())
