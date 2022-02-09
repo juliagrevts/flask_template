@@ -1,7 +1,6 @@
 from flask import current_app
 import requests
 
-import webapp
 
 def weather_by_city(city_name):
     weather_url = current_app.config['WEATHER_URL']
@@ -23,6 +22,7 @@ def weather_by_city(city_name):
         print('Сетевая ошибка')
         return False
     return False
+
 
 if __name__ == '__main__':
     print(weather_by_city('Moscow,Russia'))

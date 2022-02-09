@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, ValidationError
 
 from webapp.news.models import News
 
+
 class CommentForm(FlaskForm):
     news_id = HiddenField('ID новости', validators=[DataRequired()])
     comment_text = StringField('Текст комментария', validators=[DataRequired()], render_kw={'class': 'form-control'})

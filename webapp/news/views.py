@@ -9,12 +9,14 @@ from webapp.weather import weather_by_city
 
 blueprint = Blueprint('news', __name__)
 
+
 @blueprint.route('/')
 def index():
     title = 'Новости Python'
     weather = weather_by_city(current_app.config['WEATHER_DEFAULT_CITY'])
     news_list = News.query.filter(News.text.is_not(None)).order_by(News.published.desc()).all()
     return render_template('news/index.html', page_title=title, weather=weather, news_list=news_list)
+
 
 @blueprint.route('/news/<int:news_id>')
 def single_news(news_id):
@@ -28,6 +30,7 @@ def single_news(news_id):
     return render_template(
         'news/single_news.html', page_title=my_news.title, news=my_news, news_list=news_list, comment_form=comment_form
     )
+
 
 @blueprint.route('/news/comment', methods=['POST'])
 @login_required

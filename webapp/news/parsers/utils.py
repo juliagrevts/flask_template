@@ -3,6 +3,7 @@ import requests
 from webapp.db import db
 from webapp.news.models import News
 
+
 def get_html(url):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:94.0) Gecko/20100101 Firefox/94.0'
@@ -14,6 +15,7 @@ def get_html(url):
     except(requests.RequestException, ValueError):
         print('Сетевая ошибка')
         return False
+
 
 def save_news(title, url, published):
     news_exists = News.query.filter(News.url == url).count()

@@ -9,7 +9,7 @@ app = create_app()
 
 with app.app_context():
     username = input('Введите имя пользователя: ')
-    
+
     if User.query.filter(User.username == username).count():
         print('Пользователь с таким именем уже существует')
         sys.exit(0)
@@ -20,7 +20,7 @@ with app.app_context():
     if not password == password2:
         print('Пароли не одинаковые')
         sys.exit(0)
-    
+
     new_user = User(username=username, role='admin')
     new_user.set_password(password)
 
